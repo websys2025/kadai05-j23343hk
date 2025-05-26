@@ -13,10 +13,15 @@
     <div id="result">結果はここに表示</div>
     <script>
         async function zip_api(myForm) {
-            const endpoint = "https://zipcloud.ibsnet.co.jp/api/search";
+            const endpoint = "https://zipcloud.ibsnet.co.jp/api/search";//エンドポイント
             // ここにコードを書く
             // zipcloudのAPI呼び出して結果を表示する
-            document.getElementById("result").innerHTML =  myForm.zipcode.value; // 現状ではそのまま表示しているだけ
+
+            //const aRes = await fetch("https://zipcloud.ibsnet.co.jp/api/search?zipcode="+myForm.zipcode.value); 
+            const aRes = await fetch(`${endpoint}?zipcode=${myForm.zipcode.value}`); 
+            const data = await aRes.text();
+
+            document.getElementById("result").innerHTML =  data; // 現状ではそのまま表示しているだけ
         }
     </script>
 </body>
