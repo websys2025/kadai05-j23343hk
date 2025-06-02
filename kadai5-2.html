@@ -4,21 +4,21 @@
     <title>演習課題5-2：国名から首都APIの呼び出しテスト</title>
 </head>
 <body>
-    <h1 id="msg">国名から首都を調べるAPI</h1>
+    <h1 id="msg">外部APIの呼び出しテスト</h1>
     <form name="apiform"><p>
-        国名：<input type="text" name="zipcode">
-        <button type="button" onclick="zip_api(this.form)">実行</button>
+        国名：<input type="text" name="form_data">
+        <button type="button" onclick="some_api(this.form)">実行</button>
     </p></form>
     
-    <div id="result">結果はここに表示</div>
+    <div id="result"></div>
     <script>
-        async function zip_api(myForm) {
+        async function some_api(myForm) {
             const endpoint = "https://restcountries.com/v3.1/all?fields=name,capital";
             // APIを呼び出す
             const aRes = await fetch(endpoint);
             const data = await aRes.json();
 
-            const input = myForm.zipcode.value.trim().toLowerCase();
+            const input = myForm.form_data.value.trim().toLowerCase();
             const country = data.find(c => c.name.common.toLowerCase() === input);
 
             let resultText = "";
@@ -28,6 +28,7 @@
             } 
 
             document.getElementById("result").innerHTML = resultText;
+            document.apiform.reset();
         }
     </script>
 </body>
